@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list_flutter_1/screen/my_home_page.dart';
 import '../model/user.dart';
 
 class LoginPage extends StatefulWidget {
@@ -25,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // 📌 Icône stylisée au lieu de l’image
+                //  Icône stylisée
                 const Icon(
                   Icons.account_circle,
                   size: 100,
@@ -33,9 +32,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 20),
 
-                // 📌 Titre
+                //  Titre
                 const Text(
-                  "Bienvenue !",
+                  "Welcome !",
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -44,11 +43,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 10),
 
-                // 📌 Champ Nom d'utilisateur
+                //  Champ Nom d'utilisateur
                 TextField(
                   controller: _nameController,
                   decoration: InputDecoration(
-                    labelText: "Nom d'utilisateur",
+                    labelText: "Username",
                     prefixIcon: const Icon(Icons.person),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -57,11 +56,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 15),
 
-                // 📌 Champ Mot de passe
+                //  Champ Mot de passe
                 TextField(
                   controller: _passwordController,
                   decoration: InputDecoration(
-                    labelText: "Mot de passe",
+                    labelText: "Password",
                     prefixIcon: const Icon(Icons.lock),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -71,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 10),
 
-                // 📌 Message d'erreur
+                //  Message d'erreur
                 if (message.isNotEmpty)
                   Text(
                     message,
@@ -80,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 20),
 
-                // 📌 Bouton Connexion
+                //  Bouton Connexion
                 SizedBox(
                   width: double.infinity,
                   height: 50,
@@ -93,8 +92,34 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     child: const Text(
-                      "Se connecter",
+                      "Login",
                       style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+
+                Text("Pas de compte ?"),
+                SizedBox(height: 10),
+
+                //  Bouton D'inscription
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: ()=>{
+                      Navigator.pushNamed(context, "/register")
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+
+                      ),
+                    ),
+                    child: const Text(
+                      "Register",
+                      style: TextStyle(fontSize: 18, color: Colors.blueAccent),
                     ),
                   ),
                 ),
@@ -106,18 +131,18 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // 📌 Fonction de connexion
+  //  Fonction de connexion
   void login() {
     final userName = _nameController.text;
     final userPassword = _passwordController.text;
 
-    // 🔹 Vérifie si un utilisateur existe
+    // Vérifie si un utilisateur existe
     User? user = users.firstWhere(
       (el) => el.name == userName && el.password == userPassword,
       orElse: () => User(id: -1, name: "", email: "", avatarUrl: "", password: ""),
     );
 
-    // 🔹 Affiche un message d'erreur si l'utilisateur est inconnu
+    //  Affiche un message d'erreur si l'utilisateur est inconnu
     if (user.id == -1) {
       setState(() {
         message = "Nom d'utilisateur ou mot de passe incorrect";
@@ -125,10 +150,7 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    // 🔹 Redirection si l'utilisateur est valide
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => MyHomePage()),
-    );
+    //  Redirection si l'utilisateur est valide
+    Navigator.pushNamed(context, "/home");
   }
 }
