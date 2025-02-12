@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list_flutter_1/routes/routes.dart';
+//import 'package:todo_list_flutter_1/routes/routes.dart';
+import 'package:todo_list_flutter_1/routes/route2.dart';
+// import 'package:todo_list_flutter_1/screen/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +23,8 @@ class MyApp extends StatelessWidget {
       ),
       // home: const LoginPage(),
       initialRoute: '/',
-      routes: Routes().getRoutes(),
+      //routes: Routes().getRoutes(),
+      onGenerateRoute: Routing.generateRoutes,
     );
   }
 }
