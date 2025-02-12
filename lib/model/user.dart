@@ -14,14 +14,14 @@ class User {
   });
 }
 
-// 🔹 Liste d'utilisateurs avec mot de passe
+// Liste d'utilisateurs avec mot de passe
 List<User> users = [
   User(
     id: 1,
     name: "Alice Doe",
     email: "alice@example.com",
     avatarUrl: "https://i.pravatar.cc/150?img=1",
-    password: "alice123", // Ajout
+    password: "alice123",
   ),
   User(
     id: 2,

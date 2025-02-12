@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import '../animation/flip_effect.dart';
-import '../model/user.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   var message = '';
 
   @override
@@ -28,14 +29,14 @@ class _LoginPageState extends State<LoginPage> {
                 //  Icône stylisée
                 const Icon(
                   Icons.account_circle,
-                  size: 100,
+                  size: 50,
                   color: Colors.blueAccent,
                 ),
                 const SizedBox(height: 20),
 
                 //  Titre
                 const Text(
-                  "Welcome !",
+                  "Sign Up !",
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -57,12 +58,39 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 15),
 
+                //  Champ Email d'utilisateur
+                TextField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    labelText: "UserEmail",
+                    prefixIcon: const Icon(Icons.mail),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+
                 //  Champ Mot de passe
                 TextField(
                   controller: _passwordController,
                   decoration: InputDecoration(
                     labelText: "Password",
                     prefixIcon: const Icon(Icons.lock),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  obscureText: true,
+                ),
+                const SizedBox(height: 10),
+
+                //  Champ Confirm  Mot de passe
+                TextField(
+                  controller: _confirmPasswordController,
+                  decoration: InputDecoration(
+                    labelText: "Confirm Password",
+                    prefixIcon: const Icon(Icons.password),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -80,24 +108,21 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 20),
 
-                //  Bouton Connexion
+                //  Bouton D'inscription
                 SizedBox(
-                  width: double.infinity,
+                  width: double.maxFinite,
                   height: 50,
-                  child: FlipEffect(
-                    duration: Duration(milliseconds: 3000),
-                    child: ElevatedButton(
-                      onPressed: login,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                  child: ElevatedButton(
+                    onPressed: register,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueAccent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Text(
-                        "Login",
-                        style: TextStyle(fontSize: 18, color: Colors.white),
-                      ),
+                    ),
+                    child: const Text(
+                      "Register",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),
                 ),
@@ -106,13 +131,14 @@ class _LoginPageState extends State<LoginPage> {
                 Text("Pas de compte ?"),
                 SizedBox(height: 10),
 
-                //  Bouton D'inscription
+                //  Bouton Connexion
                 SizedBox(
-                  width: double.infinity,
+                  width: double.maxFinite,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () =>
-                        {Navigator.pushNamed(context, "/register")},
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/");
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
@@ -120,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     child: const Text(
-                      "Register",
+                      "Login",
                       style: TextStyle(fontSize: 18, color: Colors.blueAccent),
                     ),
                   ),
@@ -133,31 +159,5 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  //  Fonction de connexion
-  void login() {
-    final userName = _nameController.text;
-    final userPassword = _passwordController.text;
-
-    // Vérifie si un utilisateur existe
-    User? user = users.firstWhere(
-      (el) => el.name == userName && el.password == userPassword,
-      orElse: () =>
-          User(id: -1, name: "", email: "", avatarUrl: "", password: ""),
-    );
-
-    //  Affiche un message d'erreur si l'utilisateur est inconnu
-    if (user.id == -1) {
-      setState(() {
-        message = "Nom d'utilisateur ou mot de passe incorrect";
-      });
-      return;
-    }
-
-    // 🔹 Redirection si l'utilisateur est valide
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => MyHomePage()),
-    // );
-    Navigator.pushNamed(context, "/home");
-  }
+  void register() {}
 }
