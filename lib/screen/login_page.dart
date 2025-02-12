@@ -126,9 +126,10 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     // 🔹 Redirection si l'utilisateur est valide
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => MyHomePage()),
-    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => MyHomePage()),
+    // );
+    Navigator.pushNamed(context, "/home");
   }
 }
