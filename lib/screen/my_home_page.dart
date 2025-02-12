@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list_flutter_1/components/drawer_option_list.dart';
 import 'package:todo_list_flutter_1/components/navbar_bottom.dart';
 import 'package:todo_list_flutter_1/model/todo.dart';
 
@@ -61,7 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      drawer: Drawer(),
+      drawer: Drawer(
+        backgroundColor: Colors.grey[300],
+        child: DrawerOptionList(),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

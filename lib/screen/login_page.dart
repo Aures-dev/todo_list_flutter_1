@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../animation/flip_effect.dart';
 import '../model/user.dart';
 
 class LoginPage extends StatefulWidget {
@@ -83,17 +84,20 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   width: double.infinity,
                   height: 50,
-                  child: ElevatedButton(
-                    onPressed: login,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                  child: FlipEffect(
+                    duration: Duration(milliseconds: 3000),
+                    child: ElevatedButton(
+                      onPressed: login,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
@@ -107,14 +111,12 @@ class _LoginPageState extends State<LoginPage> {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: ()=>{
-                      Navigator.pushNamed(context, "/register")
-                    },
+                    onPressed: () =>
+                        {Navigator.pushNamed(context, "/register")},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
-
                       ),
                     ),
                     child: const Text(
@@ -139,7 +141,8 @@ class _LoginPageState extends State<LoginPage> {
     // Vérifie si un utilisateur existe
     User? user = users.firstWhere(
       (el) => el.name == userName && el.password == userPassword,
-      orElse: () => User(id: -1, name: "", email: "", avatarUrl: "", password: ""),
+      orElse: () =>
+          User(id: -1, name: "", email: "", avatarUrl: "", password: ""),
     );
 
     //  Affiche un message d'erreur si l'utilisateur est inconnu
